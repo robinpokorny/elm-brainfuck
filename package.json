@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "elm-brainfuck",
+  "version": "1.0.0",
+  "description": "A brainfuck interpreter in Elm",
+  "scripts": {
+    "test": "elm-test tests/TestRunner.elm"
+  },
+  "author": "Robin Pokorny <me@robinpokorny.com> (http://robinpokorny.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "elm": "^0.16.0",
+    "elm-test": "^0.16.1-alpha4"
+  }
+}
