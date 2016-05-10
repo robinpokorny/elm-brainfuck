@@ -6,10 +6,10 @@ import ElmTest exposing (consoleRunner)
 import Console exposing (IO, run)
 import Task
 
-import Tests
+import TapeTests
 
 console : IO ()
-console = consoleRunner Tests.all
+console = consoleRunner TapeTests.all
 
 port runner : Signal (Task.Task x ())
 port runner = run console
