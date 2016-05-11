@@ -19,7 +19,7 @@ all =
 empty : Test
 empty =
   let
-    ( commands, loops ) =
+    { commands, loops } =
       Parser.parse ""
   in
     suite
@@ -36,7 +36,7 @@ empty =
 simple : Test
 simple =
   let
-    ( commands, _ ) =
+    { commands } =
       Parser.parse "<>+-.,[]"
   in
     suite
@@ -59,7 +59,7 @@ simple =
 loopsSimple : Test
 loopsSimple =
   let
-    ( _, loops ) =
+    { loops } =
       Parser.parse "[+-]"
   in
     suite
@@ -76,7 +76,7 @@ loopsSimple =
 loopsComplex : Test
 loopsComplex =
   let
-    ( _, loops ) =
+    { loops } =
       Parser.parse "[[+-].][]"
   in
     suite

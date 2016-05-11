@@ -1,4 +1,4 @@
-module Parser (..) where
+module Parser (parse, Command(..), Program) where
 
 import Dict exposing (Dict)
 import String
@@ -6,7 +6,9 @@ import Utils exposing (ensureJust, unionWithReverse)
 
 
 type alias Program =
-  ( List Command, Dict Int Int )
+  { commands : List Command
+  , loops : Dict Int Int
+  }
 
 
 type Command
@@ -31,7 +33,9 @@ parse instructions =
     loops =
       getLoops commands
   in
-    ( commands, loops )
+    { commands = commands
+    , loops = loops
+    }
 
 
 getLoops : List Command -> Dict Int Int
