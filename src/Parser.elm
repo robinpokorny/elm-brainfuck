@@ -1,16 +1,26 @@
 module Parser (parse, Command(..), Program) where
 
+{-| Todo
+
+@docs parse, Command, Program
+
+-}
+
 import Dict exposing (Dict)
 import String
 import Utils exposing (ensureJust, unionWithReverse)
 
 
+{-| Todo
+-}
 type alias Program =
   { commands : List Command
   , loops : Dict Int Int
   }
 
 
+{-| Todo
+-}
 type Command
   = Next
   | Prev
@@ -22,6 +32,8 @@ type Command
   | LoopEnd
 
 
+{-| Todo
+-}
 parse : String -> Program
 parse instructions =
   let

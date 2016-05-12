@@ -1,4 +1,8 @@
-module Brainfuck (..) where
+module Brainfuck (run) where
+
+{-| Todo
+@docs run
+-}
 
 import String
 import Char
@@ -29,6 +33,8 @@ init { commands, loops } input =
   }
 
 
+{-| Todo
+-}
 run : String -> String -> String
 run instructions input =
   let

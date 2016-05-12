@@ -2,6 +2,7 @@ module BrainfuckTests (all) where
 
 import ElmTest exposing (..)
 import String
+import Char
 import Brainfuck
 
 
@@ -12,6 +13,9 @@ all =
     [ empty
     , zero
     , helloWord
+    , echoTill255
+    , echoTill0
+    , multiplier
     ]
 
 
@@ -42,3 +46,52 @@ helloWord =
     test
       "runs Hello wors"
       (assertEqual "Hello World!" (Brainfuck.run instructions ""))
+
+
+echoTill255 : Test
+echoTill255 =
+  let
+    instructions =
+      ",+[-.,+]"
+
+    input =
+      "Brainfuck" ++ (intToString 255)
+  in
+    test
+      "echoes until byte(255) encountred"
+      (assertEqual "Brainfuck" (Brainfuck.run instructions input))
+
+
+echoTill0 : Test
+echoTill0 =
+  let
+    instructions =
+      ",[.[-],]"
+
+    input =
+      "Brainfuck" ++ (intToString 0)
+  in
+    test
+      "echoes until byte(0) encountred"
+      (assertEqual "Brainfuck" (Brainfuck.run instructions input))
+
+
+multiplier : Test
+multiplier =
+  let
+    instructions =
+      ",>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>."
+
+    input =
+      (intToString 7) ++ (intToString 8)
+  in
+    test
+      "multiplies two numbers"
+      (assertEqual (intToString 56) (Brainfuck.run instructions input))
+
+
+intToString : Int -> String
+intToString number =
+  number
+    |> Char.fromCode
+    |> String.fromChar
