@@ -2,7 +2,7 @@ module TapeTests (all) where
 
 import ElmTest exposing (..)
 import Dict
-import Tape
+import Brainfuck.Tape as Tape
 
 
 all : Test
@@ -19,6 +19,7 @@ all =
     , increment
     , decrement
     ]
+
 
 empty : Test
 empty =
@@ -111,15 +112,15 @@ set =
 
 move : Test
 move =
-    suite
-      "move function"
-      [ test
-          "moves position to any number"
-          (assertEqual 30 (snd (Tape.move 30 Tape.empty)))
-      , test
-          "moves position even to negative number"
-          (assertEqual -30 (snd (Tape.move -30 Tape.empty)))
-      ]
+  suite
+    "move function"
+    [ test
+        "moves position to any number"
+        (assertEqual 30 (snd (Tape.move 30 Tape.empty)))
+    , test
+        "moves position even to negative number"
+        (assertEqual -30 (snd (Tape.move -30 Tape.empty)))
+    ]
 
 
 next : Test

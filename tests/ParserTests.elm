@@ -2,7 +2,7 @@ module ParserTests (all) where
 
 import ElmTest exposing (..)
 import Dict
-import Parser exposing (Command(..))
+import Brainfuck.Parser as Parser exposing (Command(..))
 
 
 all : Test

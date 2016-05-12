@@ -1,4 +1,4 @@
-module Utils (ensureJust, unionWithReverse) where
+module Brainfuck.Utils (ensureJust, unionWithReverse) where
 
 import Dict exposing (Dict)
 

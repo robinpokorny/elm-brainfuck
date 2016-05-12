@@ -1,4 +1,4 @@
-module Tape (Tape, empty, fromList, get, set, move, next, prev, increment, decrement) where
+module Brainfuck.Tape (Tape, empty, fromList, get, set, move, next, prev, increment, decrement) where
 
 {-| Simple unbounded array with a movable data pointer.
 Tape is indexed by `Int` and its values are also `Int`

@@ -7,9 +7,9 @@ module Brainfuck (run) where
 import String
 import Char
 import Dict exposing (Dict)
-import Parser exposing (..)
-import Tape exposing (..)
-import Utils exposing (ensureJust)
+import Brainfuck.Parser exposing (..)
+import Brainfuck.Tape as Tape exposing (Tape)
+import Brainfuck.Utils exposing (ensureJust)
 
 
 type alias Model =

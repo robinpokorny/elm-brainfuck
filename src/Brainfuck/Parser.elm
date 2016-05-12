@@ -1,4 +1,4 @@
-module Parser (parse, Command(..), Program) where
+module Brainfuck.Parser (parse, Command(..), Program) where
 
 {-| Todo
 
@@ -8,7 +8,7 @@ module Parser (parse, Command(..), Program) where
 
 import Dict exposing (Dict)
 import String
-import Utils exposing (ensureJust, unionWithReverse)
+import Brainfuck.Utils exposing (ensureJust, unionWithReverse)
 
 
 {-| Todo

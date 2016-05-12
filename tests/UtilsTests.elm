@@ -2,7 +2,7 @@ module UtilsTests (all) where
 
 import ElmTest exposing (..)
 import Dict
-import Utils
+import Brainfuck.Utils as Utils
 
 
 all : Test
