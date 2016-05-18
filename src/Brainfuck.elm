@@ -1,6 +1,6 @@
 module Brainfuck (run) where
 
-{-| Todo
+{-| A brainfuck interpreter in Elm
 @docs run
 -}
 
@@ -33,7 +33,13 @@ init { commands, loops } input =
   }
 
 
-{-| Todo
+{-| Run Brainfuck source code with specified input.
+Returns an output string.
+
+   -- Double input '1' == 49, 'b' == 98
+   run ",[>++<-]>." "1" == "b"
+
+Input is taken one by one. If end is reached, 0 would be assumed.
 -}
 run : String -> String -> String
 run instructions input =
@@ -83,12 +89,19 @@ step model =
           }
 
       Read ->
-        step
-          { model
-            | current = model.current + 1
-            , tape = Tape.set (Char.toCode (ensureJust "Missing input" (List.head model.input))) model.tape
-            , input = Maybe.withDefault [] (List.tail model.input)
-          }
+        let
+          newValue =
+            model.input
+              |> List.head
+              |> Maybe.map Char.toCode
+              |> Maybe.withDefault 0
+        in
+          step
+            { model
+              | current = model.current + 1
+              , tape = Tape.set newValue model.tape
+              , input = Maybe.withDefault [] (List.tail model.input)
+            }
 
       Write ->
         step

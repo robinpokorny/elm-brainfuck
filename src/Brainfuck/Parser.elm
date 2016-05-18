@@ -1,8 +1,12 @@
 module Brainfuck.Parser (parse, Command(..), Program) where
 
-{-| Todo
+{-| Converts Brainfuck source code to Elm structures.
 
-@docs parse, Command, Program
+# Definition
+@docs Command, Program
+
+# Use
+@docs parse
 
 -}
 
@@ -11,7 +15,8 @@ import String
 import Brainfuck.Utils exposing (ensureJust, unionWithReverse)
 
 
-{-| Todo
+{-| Parsed Brainfuck program consists of a list of `Command`s to execute
+and a symetric `Dict` of jumps of matching square brackets.
 -}
 type alias Program =
   { commands : List Command
@@ -19,7 +24,7 @@ type alias Program =
   }
 
 
-{-| Todo
+{-| Represent one of the eight commands of the language.
 -}
 type Command
   = Next
@@ -32,7 +37,15 @@ type Command
   | LoopEnd
 
 
-{-| Todo
+{-| Parse string to `Program`.
+
+All unknown characters are ignored. Parser assumes correct brackets
+pairing and will crash otherwise.
+
+    parse ",[>+<-]>." ==
+      { commands = [ Read, LoopStart, Next, … ]
+      , loops = Dict.fromList [ ( 1, 6 ), ( 6, 1 ) ]
+      }
 -}
 parse : String -> Program
 parse instructions =
