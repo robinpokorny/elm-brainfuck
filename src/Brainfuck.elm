@@ -36,8 +36,8 @@ init { commands, loops } input =
 {-| Run Brainfuck source code with specified input.
 Returns an output string.
 
-   -- Double input '1' == 49, 'b' == 98
-   run ",[>++<-]>." "1" == "b"
+    -- Double input '1' == 49, 'b' == 98
+    run ",[>++<-]>." "1" == "b"
 
 Input is taken one by one. If end is reached, 0 would be assumed.
 -}

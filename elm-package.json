@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "summary": "A brainfuck interpreter in Elm",
     "repository": "https://github.com/robinpokorny/elm-brainfuck.git",
     "license": "MIT",
@@ -7,9 +7,9 @@
         "src"
     ],
     "exposed-modules": [
-      "Brainfuck",
-      "Brainfuck.Tape",
-      "Brainfuck.Parser"
+        "Brainfuck",
+        "Brainfuck.Tape",
+        "Brainfuck.Parser"
     ],
     "dependencies": {
         "elm-lang/core": "3.0.0 <= v < 4.0.0"
