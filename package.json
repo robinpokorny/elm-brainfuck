@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "elm-brainfuck",
-  "version": "1.0.0",
   "description": "A brainfuck interpreter in Elm",
   "scripts": {
     "test": "elm-test tests/TestRunner.elm"
