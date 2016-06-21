@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "2.0.0",
     "summary": "A brainfuck interpreter in Elm",
     "repository": "https://github.com/robinpokorny/elm-brainfuck.git",
     "license": "MIT",
