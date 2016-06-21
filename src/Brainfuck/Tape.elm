@@ -1,4 +1,4 @@
-module Brainfuck.Tape (Tape, empty, fromList, get, set, move, next, prev, increment, decrement) where
+module Brainfuck.Tape exposing (Tape, empty, fromList, get, set, move, next, prev, increment, decrement)
 
 {-| Simple unbounded array with a movable data pointer.
 Tape is indexed by `Int` and its values are also `Int`
@@ -23,28 +23,28 @@ import Dict
 {-| An unbounded `Int`-indexed tape of numbers from 0 to 255.
 -}
 type alias Tape =
-  ( Dict.Dict Int Int, Int )
+    ( Dict.Dict Int Int, Int )
 
 
 {-| Create an empty tape.
 -}
 empty : Tape
 empty =
-  ( Dict.empty, 0 )
+    ( Dict.empty, 0 )
 
 
 {-| Convert a list into a tape.
 -}
 fromList : List Int -> Tape
 fromList values =
-  let
-    clamped =
-      List.map clampValue values
+    let
+        clamped =
+            List.map clampValue values
 
-    tape =
-      Dict.fromList (List.indexedMap (,) clamped)
-  in
-    ( tape, 0 )
+        tape =
+            Dict.fromList (List.indexedMap (,) clamped)
+    in
+        ( tape, 0 )
 
 
 {-| Get the value at the current position. If the key is not found, return
@@ -52,54 +52,54 @@ fromList values =
 -}
 get : Tape -> Int
 get ( tape, position ) =
-  Maybe.withDefault 0 (Dict.get position tape)
+    Maybe.withDefault 0 (Dict.get position tape)
 
 
 {-| Set value at current position. Value is clamped within 0 and 255.
 -}
 set : Int -> Tape -> Tape
 set value ( tape, position ) =
-  let
-    newTape =
-      Dict.insert position (clampValue value) tape
-  in
-    ( newTape, position )
+    let
+        newTape =
+            Dict.insert position (clampValue value) tape
+    in
+        ( newTape, position )
 
 
 {-| Set position.
 -}
 move : Int -> Tape -> Tape
 move position ( tape, _ ) =
-  ( tape, position )
+    ( tape, position )
 
 
 {-| Move position right by one.
 -}
 next : Tape -> Tape
 next ( tape, position ) =
-  ( tape, position + 1 )
+    ( tape, position + 1 )
 
 
 {-| Move position left by one.
 -}
 prev : Tape -> Tape
 prev ( tape, position ) =
-  ( tape, position - 1 )
+    ( tape, position - 1 )
 
 
 addOne : Maybe Int -> Maybe Int
 addOne value =
-  Just
-    (case value of
-      Just n ->
-        if n < 255 then
-          n + 1
-        else
-          0
+    Just
+        (case value of
+            Just n ->
+                if n < 255 then
+                    n + 1
+                else
+                    0
 
-      Nothing ->
-        1
-    )
+            Nothing ->
+                1
+        )
 
 
 {-| Increment value at current position by one. Value is truncated overflow.
@@ -110,26 +110,26 @@ addOne value =
 -}
 increment : Tape -> Tape
 increment ( tape, position ) =
-  let
-    newTape =
-      Dict.update position addOne tape
-  in
-    ( newTape, position )
+    let
+        newTape =
+            Dict.update position addOne tape
+    in
+        ( newTape, position )
 
 
 subtractOne : Maybe Int -> Maybe Int
 subtractOne value =
-  Just
-    (case value of
-      Just n ->
-        if n > 0 then
-          n - 1
-        else
-          255
+    Just
+        (case value of
+            Just n ->
+                if n > 0 then
+                    n - 1
+                else
+                    255
 
-      Nothing ->
-        255
-    )
+            Nothing ->
+                255
+        )
 
 
 {-| Decrement value at current position by one. Value is floored at 0.
@@ -138,13 +138,13 @@ subtractOne value =
 -}
 decrement : Tape -> Tape
 decrement ( tape, position ) =
-  let
-    newTape =
-      Dict.update position subtractOne tape
-  in
-    ( newTape, position )
+    let
+        newTape =
+            Dict.update position subtractOne tape
+    in
+        ( newTape, position )
 
 
 clampValue : Int -> Int
 clampValue value =
-  (clamp 0 255 value)
+    (clamp 0 255 value)

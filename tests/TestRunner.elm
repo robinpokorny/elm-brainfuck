@@ -1,8 +1,6 @@
-module Main (..) where
+module Main exposing (..)
 
-import Signal exposing (Signal)
-import ElmTest exposing (consoleRunner, suite)
-import Console exposing (IO, run)
+import ElmTest exposing (..)
 import Task
 import BrainfuckTests
 import ParserTests
@@ -10,17 +8,16 @@ import TapeTests
 import UtilsTests
 
 
-console : IO ()
-console =
-  [ TapeTests.all
-  , ParserTests.all
-  , UtilsTests.all
-  , BrainfuckTests.all
-  ]
-    |> suite "Brainfuck compiler"
-    |> consoleRunner
+tests : Test
+tests =
+    suite "Brainfuck compiler"
+        [ TapeTests.all
+        , ParserTests.all
+        , UtilsTests.all
+        , BrainfuckTests.all
+        ]
 
 
-port runner : Signal (Task.Task x ())
-port runner =
-  run console
+main : Program Never
+main =
+    runSuite tests
