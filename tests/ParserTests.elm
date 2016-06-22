@@ -12,6 +12,7 @@ all =
         , simple
         , loopsSimple
         , loopsComplex
+        , ignore
         ]
 
 
@@ -37,7 +38,7 @@ simple =
     in
         suite "parsers simple instructions"
             [ test "position change"
-                (assertEqual [ Next, Prev ] (List.take 2 commands))
+                (assertEqual [ Prev, Next ] (List.take 2 commands))
             , test "value change"
                 (assertEqual [ Inc, Dec ] (List.drop 2 (List.take 4 commands)))
             , test "position change"
@@ -80,4 +81,18 @@ loopsComplex =
                 (assertEqual (Just 8) (Dict.get 7 loops))
             , test "following loop end"
                 (assertEqual (Just 7) (Dict.get 8 loops))
+            ]
+
+
+ignore : Test
+ignore =
+    let
+        { commands, loops } =
+            Parser.parse "test!"
+    in
+        suite "ignores unknown instructions"
+            [ test "create empty commands"
+                (assert (List.isEmpty commands))
+            , test "create empty loops map"
+                (assert (Dict.isEmpty loops))
             ]

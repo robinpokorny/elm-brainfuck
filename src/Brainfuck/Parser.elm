@@ -54,6 +54,8 @@ parse instructions =
             instructions
                 |> String.toList
                 |> List.map toCommands
+                |> List.filter isJust
+                |> List.map (Maybe.withDefault Write)
 
         loops =
             getLoops commands
@@ -97,32 +99,42 @@ findLeftMatching ( index, command ) ( loops, lefts ) =
             ( loops, lefts )
 
 
-toCommands : Char -> Command
+isJust : Maybe a -> Bool
+isJust a =
+    case a of
+        Just _ ->
+            True
+
+        Nothing ->
+            False
+
+
+toCommands : Char -> Maybe Command
 toCommands char =
     case char of
-        '<' ->
-            Next
-
         '>' ->
-            Prev
+            Just Next
+
+        '<' ->
+            Just Prev
 
         '+' ->
-            Inc
+            Just Inc
 
         '-' ->
-            Dec
+            Just Dec
 
         '.' ->
-            Write
+            Just Write
 
         ',' ->
-            Read
+            Just Read
 
         '[' ->
-            LoopStart
+            Just LoopStart
 
         ']' ->
-            LoopEnd
+            Just LoopEnd
 
         _ ->
-            Next
+            Nothing
