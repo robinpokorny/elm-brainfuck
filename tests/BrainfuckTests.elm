@@ -1,6 +1,7 @@
 module BrainfuckTests exposing (all)
 
-import ElmTest exposing (..)
+import Test exposing (..)
+import Expect
 import String
 import Char
 import Brainfuck
@@ -8,7 +9,7 @@ import Brainfuck
 
 all : Test
 all =
-    suite "Brainfuck"
+    describe "Brainfuck"
         [ empty
         , zero
         , helloWord
@@ -20,8 +21,11 @@ all =
 
 empty : Test
 empty =
-    test "runs empty program"
-        (assertEqual "" (Brainfuck.run "" ""))
+    test "runs empty program" <|
+        \() ->
+            Expect.equal
+                ""
+                (Brainfuck.run "" "")
 
 
 zero : Test
@@ -30,8 +34,11 @@ zero =
         instructions =
             (String.repeat 48 "+") ++ "."
     in
-        test "runs empty program"
-            (assertEqual "0" (Brainfuck.run instructions ""))
+        test "runs empty program" <|
+            \() ->
+                Expect.equal
+                    "0"
+                    (Brainfuck.run instructions "")
 
 
 helloWord : Test
@@ -40,8 +47,11 @@ helloWord =
         instructions =
             "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+."
     in
-        test "runs Hello wors"
-            (assertEqual "Hello World!" (Brainfuck.run instructions ""))
+        test "runs Hello wors" <|
+            \() ->
+                Expect.equal
+                    "Hello World!"
+                    (Brainfuck.run instructions "")
 
 
 echoTill255 : Test
@@ -53,8 +63,11 @@ echoTill255 =
         input =
             "Brainfuck" ++ (intToString 255)
     in
-        test "echoes until byte(255) encountred"
-            (assertEqual "Brainfuck" (Brainfuck.run instructions input))
+        test "echoes until byte(255) encountred" <|
+            \() ->
+                Expect.equal
+                    "Brainfuck"
+                    (Brainfuck.run instructions input)
 
 
 echoTill0 : Test
@@ -66,8 +79,11 @@ echoTill0 =
         input =
             "Brainfuck" ++ (intToString 0)
     in
-        test "echoes until byte(0) encountred"
-            (assertEqual "Brainfuck" (Brainfuck.run instructions input))
+        test "echoes until byte(0) encountred" <|
+            \() ->
+                Expect.equal
+                    "Brainfuck"
+                    (Brainfuck.run instructions input)
 
 
 multiplier : Test
@@ -79,8 +95,11 @@ multiplier =
         input =
             (intToString 7) ++ (intToString 8)
     in
-        test "multiplies two numbers"
-            (assertEqual (intToString 56) (Brainfuck.run instructions input))
+        test "multiplies two numbers" <|
+            \() ->
+                Expect.equal
+                    (intToString 56)
+                    (Brainfuck.run instructions input)
 
 
 intToString : Int -> String

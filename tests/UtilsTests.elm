@@ -1,13 +1,14 @@
 module UtilsTests exposing (all)
 
-import ElmTest exposing (..)
+import Test exposing (..)
+import Expect
 import Dict
 import Brainfuck.Utils as Utils
 
 
 all : Test
 all =
-    suite "Utils"
+    describe "Utils"
         [ ensureJust
         , unionWithReverse
         ]
@@ -15,9 +16,12 @@ all =
 
 ensureJust : Test
 ensureJust =
-    suite "ensureJust function"
-        [ test "returns value when present"
-            (assertEqual 5 (Utils.ensureJust "Error" (Just 5)))
+    describe "ensureJust function"
+        [ test "returns value when present" <|
+            \() ->
+                Expect.equal
+                    5
+                    (Utils.ensureJust "Error" (Just 5))
         ]
 
 
@@ -27,9 +31,15 @@ unionWithReverse =
         result =
             Utils.unionWithReverse (Dict.singleton 0 1)
     in
-        suite "unionWithReverse function"
-            [ test "keeps original values"
-                (assertEqual (Just 1) (Dict.get 0 result))
-            , test "include values from reverse"
-                (assertEqual (Just 0) (Dict.get 1 result))
+        describe "unionWithReverse function"
+            [ test "keeps original values" <|
+                \() ->
+                    Expect.equal
+                        (Just 1)
+                        (Dict.get 0 result)
+            , test "include values from reverse" <|
+                \() ->
+                    Expect.equal
+                        (Just 0)
+                        (Dict.get 1 result)
             ]

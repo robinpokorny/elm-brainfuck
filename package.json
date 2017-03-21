@@ -3,12 +3,12 @@
   "name": "elm-brainfuck",
   "description": "A brainfuck interpreter in Elm",
   "scripts": {
-    "pretest": "cd tests; elm-make --yes TestRunner.elm --output ../tests.js",
-    "test": "node ./tests.js"
+    "test": "elm-test"
   },
   "author": "Robin Pokorny <me@robinpokorny.com> (http://robinpokorny.com)",
   "license": "MIT",
   "devDependencies": {
-    "elm": "^0.17.0"
+    "elm": "^0.18.0",
+    "elm-test": "^0.18.2"
   }
 }

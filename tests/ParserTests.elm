@@ -1,13 +1,14 @@
 module ParserTests exposing (all)
 
-import ElmTest exposing (..)
+import Test exposing (..)
+import Expect
 import Dict
 import Brainfuck.Parser as Parser exposing (Command(..))
 
 
 all : Test
 all =
-    suite "Parser"
+    describe "Parser"
         [ empty
         , simple
         , loopsSimple
@@ -22,11 +23,13 @@ empty =
         { commands, loops } =
             Parser.parse ""
     in
-        suite "empty instructions"
-            [ test "create empty commands"
-                (assert (List.isEmpty commands))
-            , test "create empty loops map"
-                (assert (Dict.isEmpty loops))
+        describe "empty instructions"
+            [ test "create empty commands" <|
+                \() ->
+                    Expect.true "a" (List.isEmpty commands)
+            , test "create empty loops map" <|
+                \() ->
+                    Expect.true "a" (Dict.isEmpty loops)
             ]
 
 
@@ -36,15 +39,19 @@ simple =
         { commands } =
             Parser.parse "<>+-.,[]"
     in
-        suite "parsers simple instructions"
-            [ test "position change"
-                (assertEqual [ Prev, Next ] (List.take 2 commands))
-            , test "value change"
-                (assertEqual [ Inc, Dec ] (List.drop 2 (List.take 4 commands)))
-            , test "position change"
-                (assertEqual [ Write, Read ] (List.drop 4 (List.take 6 commands)))
-            , test "position change"
-                (assertEqual [ LoopStart, LoopEnd ] (List.drop 6 commands))
+        describe "parsers simple instructions"
+            [ test "position change" <|
+                \() ->
+                    Expect.equal [ Prev, Next ] (List.take 2 commands)
+            , test "value change" <|
+                \() ->
+                    Expect.equal [ Inc, Dec ] (List.drop 2 (List.take 4 commands))
+            , test "position change" <|
+                \() ->
+                    Expect.equal [ Write, Read ] (List.drop 4 (List.take 6 commands))
+            , test "position change" <|
+                \() ->
+                    Expect.equal [ LoopStart, LoopEnd ] (List.drop 6 commands)
             ]
 
 
@@ -54,11 +61,13 @@ loopsSimple =
         { loops } =
             Parser.parse "[+-]"
     in
-        suite "parsers simple loops"
-            [ test "single loop start"
-                (assertEqual (Just 3) (Dict.get 0 loops))
-            , test "single loop end"
-                (assertEqual (Just 0) (Dict.get 3 loops))
+        describe "parsers simple loops"
+            [ test "single loop start" <|
+                \() ->
+                    Expect.equal (Just 3) (Dict.get 0 loops)
+            , test "single loop end" <|
+                \() ->
+                    Expect.equal (Just 0) (Dict.get 3 loops)
             ]
 
 
@@ -68,19 +77,25 @@ loopsComplex =
         { loops } =
             Parser.parse "[[+-].][]"
     in
-        suite "parsers complex loops"
-            [ test "outer loop start"
-                (assertEqual (Just 6) (Dict.get 0 loops))
-            , test "outer loop end"
-                (assertEqual (Just 0) (Dict.get 6 loops))
-            , test "inner loop start"
-                (assertEqual (Just 4) (Dict.get 1 loops))
-            , test "inner loop end"
-                (assertEqual (Just 1) (Dict.get 4 loops))
-            , test "following loop start"
-                (assertEqual (Just 8) (Dict.get 7 loops))
-            , test "following loop end"
-                (assertEqual (Just 7) (Dict.get 8 loops))
+        describe "parsers complex loops"
+            [ test "outer loop start" <|
+                \() ->
+                    Expect.equal (Just 6) (Dict.get 0 loops)
+            , test "outer loop end" <|
+                \() ->
+                    Expect.equal (Just 0) (Dict.get 6 loops)
+            , test "inner loop start" <|
+                \() ->
+                    Expect.equal (Just 4) (Dict.get 1 loops)
+            , test "inner loop end" <|
+                \() ->
+                    Expect.equal (Just 1) (Dict.get 4 loops)
+            , test "following loop start" <|
+                \() ->
+                    Expect.equal (Just 8) (Dict.get 7 loops)
+            , test "following loop end" <|
+                \() ->
+                    Expect.equal (Just 7) (Dict.get 8 loops)
             ]
 
 
@@ -90,9 +105,11 @@ ignore =
         { commands, loops } =
             Parser.parse "test!"
     in
-        suite "ignores unknown instructions"
-            [ test "create empty commands"
-                (assert (List.isEmpty commands))
-            , test "create empty loops map"
-                (assert (Dict.isEmpty loops))
+        describe "ignores unknown instructions"
+            [ test "create empty commands" <|
+                \() ->
+                    Expect.true "a" (List.isEmpty commands)
+            , test "create empty loops map" <|
+                \() ->
+                    Expect.true "a" (Dict.isEmpty loops)
             ]

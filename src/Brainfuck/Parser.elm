@@ -70,7 +70,7 @@ getLoops commands =
     commands
         |> List.indexedMap (,)
         |> List.foldl findLeftMatching ( Dict.empty, [] )
-        |> fst
+        |> Tuple.first
         |> unionWithReverse
 
 
