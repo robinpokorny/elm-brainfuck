@@ -13,6 +13,6 @@
 
 A brainfuck interpreter in [Elm](http://elm-lang.org/)
 
-[![version](https://img.shields.io/badge/version-2.0.1-green.svg?style=flat-square)](http://package.elm-lang.org/packages/robinpokorny/elm-brainfuck/)
+[![version](https://img.shields.io/badge/version-2.0.2-green.svg?style=flat-square)](http://package.elm-lang.org/packages/robinpokorny/elm-brainfuck/)
 [![Build Status](https://img.shields.io/badge/build-passed-brightgreen.svg?style=flat-square)](https://semaphoreci.com/robinpokorny/elm-brainfuck)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
